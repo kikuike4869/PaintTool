@@ -1,0 +1,31 @@
+# ## C# / Visual Studio ##
+
+# Visual Studioのユーザー固有ファイル
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studioのデバッグとビルドの成果物
+bin/
+obj/
+
+# NuGetパッケージ (最新の.NETでは通常不要ですが、念のため)
+packages/
+*.nupkg
+
+# IDE/エディタ関連
+.vs/
+.vscode/
+
+# OSが生成するファイル
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# 競合ファイル
+* の競合コピー *
+
+# アプリケーションが生成するデータディレクトリ
+# Album.csで定義されている保存先を除外します
+[Dd]ocuments/PaintToolAlbums/
