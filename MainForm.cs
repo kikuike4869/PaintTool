@@ -1,55 +1,24 @@
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace PaintTool
 {
     public partial class MainForm : Form
     {
-        private HomeScreen homeScreen = null!;
-        private CanvasEditScreen canvasEditScreen = null!;
+        private readonly ApplicationController _appController;
 
         public MainForm()
         {
             InitializeComponent();
-            this.Text = "Paint Tool";
+            this.Text = "Photo Album Application";
             this.Size = new Size(1024, 768);
-            ShowHomeScreen();
+            _appController = new ApplicationController(this);
+            _appController.ShowHomeScreen(); // 最初の画面表示をコントローラーに依頼
         }
 
-        private void ShowHomeScreen()
+        // 外部から渡されたUserControlを表示するメソッド
+        public void ShowControl(UserControl control)
         {
             this.Controls.Clear();
-            homeScreen = new HomeScreen
-            {
-                Dock = DockStyle.Fill
-            };
-            // イベントハンドラを新しいものに更新
-            homeScreen.CreateNewAlbumClicked += HomeScreen_CreateNewAlbumClicked;
-            homeScreen.OpenAlbumClicked += HomeScreen_OpenAlbumClicked;
-            this.Controls.Add(homeScreen);
-        }
-
-        // 新しいアルバム作成時のイベントハンドラ
-        private void HomeScreen_CreateNewAlbumClicked(object? sender, AlbumEventArgs e)
-        {
-            ShowCanvasEditScreen(e.Album);
-        }
-
-        // 既存アルバムを開くときのイベントハンドラ
-        private void HomeScreen_OpenAlbumClicked(object? sender, AlbumEventArgs e)
-        {
-            ShowCanvasEditScreen(e.Album);
-        }
-
-        // 引数をAlbumに変更
-        private void ShowCanvasEditScreen(Album album)
-        {
-            this.Controls.Clear();
-            canvasEditScreen = new CanvasEditScreen(album)
-            {
-                Dock = DockStyle.Fill
-            };
-            this.Controls.Add(canvasEditScreen);
+            control.Dock = DockStyle.Fill;
+            this.Controls.Add(control);
         }
     }
 }
